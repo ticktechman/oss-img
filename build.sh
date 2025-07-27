@@ -37,13 +37,21 @@ build_busybox() {
 }
 
 all_done() {
+  cd "$BASE_DIR"
   sudo umount ./root
+}
+
+pack() {
+  cd "$BASE_DIR"
+  rm -rf oss-img && mkdir oss-img
+  cp Image root.img oss-img/
+  tar Jcvf oss-img.tar.xz oss-img
 }
 
 init_image
 build_busybox
 build_linux_kernel
-
 all_done
+pack
 cd "$BASE_DIR"
 ###############################################################################
