@@ -1,0 +1,17 @@
+#!/bin/sh
+
+## create dirs
+mkdir -p /proc /sys /dev/pts
+mkdir /ftp /root
+
+## mout fstab fs
+/bin/mount -a
+mount -o remount,rw /
+
+## enable network
+ifconfig lo up
+ifconfig eth0 up
+udhcpc -i eth0 -q -n
+
+## start services in inetd.conf
+inetd
