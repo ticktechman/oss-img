@@ -20,6 +20,7 @@ init_image() {
 
 build_linux_kernel() {
   cd "$BASE_DIR"
+  sudo apt install -y build-essential libncurses-dev bison flex libssl-dev libelf-dev libudev-dev libpci-dev libiberty-dev dwarves bc
   wget https://mirrors.tuna.tsinghua.edu.cn/kernel/v6.x/linux-6.12.39.tar.xz
   tar Jxf linux-6.12.39.tar.xz
   cd linux-6.12.39
@@ -44,7 +45,7 @@ all_done() {
 pack() {
   cd "$BASE_DIR"
   rm -rf oss-img && mkdir oss-img
-  cp Image root.img oss-img/
+  cp Image root.img oss.json oss-img/
   tar Jcvf oss-img.tar.xz oss-img
 }
 
